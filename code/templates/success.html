@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Donor Management App</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
+      * {
+        margin: 0px;
+        padding: 0px;
+        color: #ffffff;
+      }
+
+      :root {
+        height: 100%;
+      }
+
+      body {
+        background-color: #4158d0;
+        background-image: linear-gradient(
+          90deg,
+          #2f48c7 0%,
+          #1376af 46%,
+          #0ea868 100%
+        );
+        background-repeat: repeat;
+        background-position: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 100%;
+        font-family: "Montserrat", sans-serif;
+      }
+      .heading {
+        margin: 10px;
+        font-size: 2.5em;
+        text-shadow: 3px 3px 3px black;
+      }
+      .action-panel {
+        margin: 20px;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+      .footer {
+        margin: 15px;
+      }
+      p {
+        margin: 20px;
+      }
+      a {
+        text-decoration: none;
+      }
+      a:hover {
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="heading">
+      Donor Management App <span class="rocket">🚀</span>
+    </div>
+    <div class="action-panel">
+      <h2>Donor Added Successfully! 😊</h2>
+      <p>Redirecting to home in <span id="timer">3</span> second!</p>
+    </div>
+    <div class="footer">
+      Made with 🤍 and ☕ by
+      <a href="https://github.com/faatehsultan"
+        >Syed Faateh Sultan Kazmi (BCSF18M022)</a
+      >
+    </div>
+
+    <script>
+      i = 2;
+      t = setInterval(() => {
+        document.getElementById("timer").textContent = i--;
+        if (i == 0) {
+          clearInterval(t);
+          window.location.href = "/";
+        }
+      }, 1000);
+    </script>
+  </body>
+</html>

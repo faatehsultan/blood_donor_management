@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blood Donor Management</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
+      * {
+        margin: 0px;
+        padding: 0px;
+        color: #ffffff;
+      }
+
+      :root {
+        height: 100%;
+      }
+
+      body {
+        background-color: #4158d0;
+        background-image: linear-gradient(
+          90deg,
+          #2f48c7 0%,
+          #1376af 46%,
+          #0ea868 100%
+        );
+        background-repeat: repeat;
+        background-position: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 100%;
+        font-family: "Montserrat", sans-serif;
+      }
+      .heading {
+        margin-top: 10px;
+        font-size: 2.5em;
+        text-shadow: 3px 3px 3px black;
+      }
+      .action-panel form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .action-panel {
+        height: 100%;
+      }
+      .btn {
+        padding: 18px;
+        width: 170px;
+        font-weight: bold;
+        border-radius: 40px;
+        font-size: 1.3em;
+        text-transform: uppercase;
+        border: 4px solid white;
+        display: flex;
+        justify-content: center;
+        box-shadow: 0px 0px 10px black;
+        align-items: center;
+        margin: 20px;
+        background-color: transparent;
+      }
+      .btn:hover {
+        background-color: rgb(4, 40, 70);
+        cursor: pointer;
+      }
+      .footer {
+        margin: 15px;
+      }
+      .action-panel input[type="text"] {
+        margin: 20px;
+        padding: 15px;
+        border-radius: 30px;
+        width: 400px;
+        border: 0px solid white;
+        box-shadow: 2px 2px 4px black;
+        font-size: 1.2em;
+        outline: none;
+        border: 4px solid #0c8c9100;
+        color: #0c8c91;
+      }
+      .action-panel input[type="text"]:focus {
+        border: 4px solid #0c8c91;
+      }
+      .dropdown_item {
+        color: black;
+        font-family: "Montserrat", sans-serif;
+        font-size: 1.4em;
+      }
+      .blood_group_row {
+        display: flex;
+        font-size: 1.4em;
+        font-weight: bold;
+        margin: 2px;
+      }
+      .blood_group_row > * {
+        margin: 0px 24px;
+      }
+      a {
+        text-decoration: none;
+      }
+      a:hover {
+        font-weight: bold;
+      }
+      .results_container table {
+        width: 920px;
+      }
+      .results_container td {
+        border: 1px solid rgb(104, 207, 214);
+        border-radius: 10px;
+        padding: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="heading">
+      Blood Donor Manager <span class="rocket">🩸</span>
+    </div>
+    <h2>Search Donor</h2>
+    <div class="action-panel">
+      <form action="/search" method="post">
+        <input type="text" placeholder="Name" name="name" maxlength="20" />
+        <div class="blood_group_row">
+          <div>
+            <input type="radio" id="group_a+" name="blood_group" value="A+" />
+            <label for="group_a+">A+</label><br />
+          </div>
+          <div>
+            <input type="radio" id="group_b+" name="blood_group" value="B+" />
+            <label for="group_b+">B+</label><br />
+          </div>
+          <div>
+            <input type="radio" id="group_ab+" name="blood_group" value="AB+" />
+            <label for="group_ab+">AB+</label><br />
+          </div>
+          <div>
+            <input type="radio" id="group_o+" name="blood_group" value="O+" />
+            <label for="group_o+">O+</label><br />
+          </div>
+        </div>
+        <div class="blood_group_row">
+          <div>
+            <input type="radio" id="group_a-" name="blood_group" value="A-" />
+            <label for="group_a-">A-</label><br />
+          </div>
+          <div>
+            <input type="radio" id="group_b-" name="blood_group" value="B-" />
+            <label for="group_b-">B-</label><br />
+          </div>
+          <div>
+            <input type="radio" id="group_ab-" name="blood_group" value="AB-" />
+            <label for="group_ab-">AB-</label><br />
+          </div>
+          <div>
+            <input type="radio" id="group_o-" name="blood_group" value="O-" />
+            <label for="group_o-">O-</label><br />
+          </div>
+        </div>
+        <input
+          type="text"
+          placeholder="Phone (03XX-XXXXXXX)"
+          name="phone"
+          pattern="03\d\d-\d{7}"
+        />
+        <input type="text" placeholder="City" name="city" maxlength="50" />
+        <div style="display: flex">
+          <a
+            href="/"
+            class="btn"
+            style="width: 40px; font-size: 1.5em; text-decoration: none"
+            >◀</a
+          >
+          <button class="btn" type="submit">Search</button>
+        </div>
+      </form>
+    </div>
+    {% if data %}
+    <hr style="width: 65%" />
+    <br />
+    <h2>Donor List</h2>
+    <br />
+    <div class="results_container">
+      <table>
+        <tr>
+          <th>Name</th>
+          <th>Phone</th>
+          <th>Blood Group</th>
+          <th>CNIC</th>
+          <th>City</th>
+        </tr>
+        {% for donor in data %}
+        <tr>
+          <td>{{donor.name}}</td>
+          <td>{{donor.phone}}</td>
+          <td>{{donor.blood_group}}</td>
+          <td>{{donor.cnic}}</td>
+          <td>{{donor.city}}</td>
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+    {% endif %}
+    <div class="footer">
+      Made with 🤍 and ☕ by
+      <a href="https://github.com/faatehsultan"
+        >Syed Faateh Sultan Kazmi (BCSF18M022)</a
+      >
+    </div>
+  </body>
+</html>
